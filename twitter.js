@@ -73,7 +73,8 @@ try {
         await run(url)
 
     } else {
-        if (imgurl != null) {
+        if (imgurl != undefined) {
+  log(img)
             var img = await getimg(imgurl)
             let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `twitter`)
             fm.writeImage(pic_cache_path, img)
@@ -98,7 +99,7 @@ try {
         Script.complete()
     }
 } catch {
-    if (imgurl != "") {
+    if (imgurl != undefined) {
         var img = await getimg(imgurl)
         let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `twitter`)
         fm.writeImage(pic_cache_path, img)
