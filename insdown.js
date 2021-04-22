@@ -126,6 +126,10 @@ async function run() {
     }
 }
 async function getimg(url) {
+    if (url == null) {
+        url = 'https://is5-ssl.mzstatic.com/image/thumb/Purple125/v4/4d/6e/da/4d6edaef-f2d7-53cf-b81a-e3e23375d4ee/Prod-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png'
+
+    }
     req = new Request(url)
     img = await req.loadImage()
     return img
@@ -136,53 +140,38 @@ var url = Pasteboard.paste()
 var imgurl = args.widgetParameter
 var fm = FileManager.local()
 try {
-    if (url.indexOf('instagram.com') >= 0) {     
+    if (url.indexOf('instagram.com') >= 0) {
         await run()
     } else {
-            if (imgurl != null) {
-                var img = await getimg(imgurl)
-                let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `insimages`)
-                fm.writeImage(pic_cache_path, img)
-            } else {
-                url = 'https://is5-ssl.mzstatic.com/image/thumb/Purple125/v4/4d/6e/da/4d6edaef-f2d7-53cf-b81a-e3e23375d4ee/Prod-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png'
-                var img = await getimg(url)
-                let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `insimages`)
-                fm.writeImage(pic_cache_path, img)
-            }
-            var img = fm.readImage(pic_cache_path)
-        }
-        log(img)
-        const widget = new ListWidget()
-        widget.setPadding(0, 0, 0, 0)
-        const info_stack = widget.addStack()
-        info_stack.layoutVertically()
-        info_stack.addSpacer()
-        const name_stack = info_stack.addStack()
-        info_stack.setPadding(10, 10, 5, 10)
-        name_stack.addSpacer()
-        widget.backgroundImage = img
-        widget.presentSmall()
-        Script.setWidget(widget)
-        Script.complete()
-    }
-    //await run()
-catch {
-    
-    var fm = FileManager.local()
-    try {
-        if (imgurl != null) {
-            var img = await getimg(imgurl)
-            let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `insimages`)
-            fm.writeImage(pic_cache_path, img)
-        } else {
-            url = 'https://is5-ssl.mzstatic.com/image/thumb/Purple125/v4/4d/6e/da/4d6edaef-f2d7-53cf-b81a-e3e23375d4ee/Prod-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png'
-            var img = await getimg(url)
-            let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `insimages`)
-            fm.writeImage(pic_cache_path, img)
-        }
-    } catch {
+        var img = await getimg(imgurl)
+        let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `insimages`)
+        fm.writeImage(pic_cache_path, img)
+
+
         var img = fm.readImage(pic_cache_path)
     }
+    const widget = new ListWidget()
+    widget.setPadding(0, 0, 0, 0)
+    const info_stack = widget.addStack()
+    info_stack.layoutVertically()
+    info_stack.addSpacer()
+    const name_stack = info_stack.addStack()
+    info_stack.setPadding(10, 10, 5, 10)
+    name_stack.addSpacer()
+    widget.backgroundImage = img
+    widget.presentSmall()
+    Script.setWidget(widget)
+    Script.complete()
+}
+//await run()
+catch {
+
+    var fm = FileManager.local()
+    var img = await getimg(imgurl)
+
+    let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `insimages`)
+    fm.writeImage(pic_cache_path, img)
+
     const widget = new ListWidget()
     widget.setPadding(0, 0, 0, 0)
     const info_stack = widget.addStack()
