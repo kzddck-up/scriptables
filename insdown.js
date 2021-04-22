@@ -118,7 +118,7 @@ async function run() {
         const cb = new CallbackURL("shortcuts://x-callback-url/run-shortcut")
         cb.addParameter("name", "ins下载器")
         await cb.open()
-        Safari.open("instagram://")
+        //Safari.open("instagram://")
     } catch {
         const n = new Notification()
         n.title = "请保证ins是正确的链接，不要包含中文"
