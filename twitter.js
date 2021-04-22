@@ -47,6 +47,10 @@ async function geturl(url) {
     }
 }
 async function getimg(url) {
+    if(url == null){
+        log(url)
+    var url = 'https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.b1fc7275.png'
+    }
     req = new Request(url)
     img = await req.loadImage()
     return img
@@ -73,17 +77,9 @@ try {
         await run(url)
 
     } else {
-        if (imgurl != undefined) {
-  log(img)
-            var img = await getimg(imgurl)
-            let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `twitter`)
-            fm.writeImage(pic_cache_path, img)
-        } else {
-            url = 'https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.b1fc7275.png'
-            var img = await getimg(url)
-            let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `twitter`)
-            fm.writeImage(pic_cache_path, img)
-        }
+        var img = await getimg(imgurl)
+        let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `twitter`)
+        fm.writeImage(pic_cache_path, img)
         const widget = new ListWidget()
         widget.setPadding(0, 0, 0, 0)
         const info_stack = widget.addStack()
@@ -99,27 +95,20 @@ try {
         Script.complete()
     }
 } catch {
-    if (imgurl != undefined) {
-        var img = await getimg(imgurl)
+    var img = await getimg(imgurl)
         let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `twitter`)
         fm.writeImage(pic_cache_path, img)
-    } else {
-        url = 'https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.b1fc7275.png'
-        var img = await getimg(url)
-        let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `twitter`)
-        fm.writeImage(pic_cache_path, img)
-    }
-    const widget = new ListWidget()
-    widget.setPadding(0, 0, 0, 0)
-    const info_stack = widget.addStack()
-    info_stack.layoutVertically()
-    info_stack.addSpacer()
-    const name_stack = info_stack.addStack()
-    info_stack.setPadding(10, 10, 5, 10)
-    name_stack.addSpacer()
-    var image = img
-    widget.backgroundImage = image
-    widget.presentSmall()
-    Script.setWidget(widget)
-    Script.complete()
+        const widget = new ListWidget()
+        widget.setPadding(0, 0, 0, 0)
+        const info_stack = widget.addStack()
+        info_stack.layoutVertically()
+        info_stack.addSpacer()
+        const name_stack = info_stack.addStack()
+        info_stack.setPadding(10, 10, 5, 10)
+        name_stack.addSpacer()
+        var image = img
+        widget.backgroundImage = image
+        widget.presentSmall()
+        Script.setWidget(widget)
+        Script.complete()
 }
