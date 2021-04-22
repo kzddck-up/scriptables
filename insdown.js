@@ -4,7 +4,7 @@ ins下载小组件
 微信公众号：kzddck
 首次时间：2021.03.05
 更新时间：2021.04.22
-修复：组件图片不显示bug，移除回跳机制
+修复：组件图片不显示bug，移除回跳机制，移除更新检测
 主要功能：下载ins所有的图片以及视频，小组件动态随机显示某用户的主页图片
 使用方法：
     首次使用需要先进行登录
@@ -131,29 +131,14 @@ async function getimg(url) {
     return img
 }
 
-//更新检测
-async function updata() {
-    var url = 'http://ckcode.tooo.top:2200/script/insupdata.json'
-    let up = await new Request(url)
-    var data = await up.loadJSON()
-    if (data.up == 1) {
-        console.log('无更新');
-    } else {
-        const n = new Notification()
-        n.title = "有更新"
-        n.body = "小组件有新的更新内容，请关注微信公众号：kzddck回复210305获取最新脚本！"
-        n.schedule()
-    }
-}
+
 var url = Pasteboard.paste()
 var imgurl = args.widgetParameter
 var fm = FileManager.local()
 try {
-    if (url.indexOf('instagram.com') >= 0) {
-        await updata()
+    if (url.indexOf('instagram.com') >= 0) {     
         await run()
     } else {
-        await updata()
             if (imgurl != null) {
                 var img = await getimg(imgurl)
                 let pic_cache_path = fm.joinPath(fm.documentsDirectory(), `insimages`)
@@ -182,7 +167,7 @@ try {
     }
     //await run()
 catch {
-    await updata()
+    
     var fm = FileManager.local()
     try {
         if (imgurl != null) {
