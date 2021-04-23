@@ -7,7 +7,7 @@
 使用方法：
     
     下载功能：需要配合快捷指令进行完成，需安装此快捷指令！
-    快捷指令：https://www.icloud.com/shortcuts/13bb4a3463834c6db6f27f3acf2d3c7a
+    快捷指令：https://www.icloud.com/shortcuts/5f5b29677242493ca5601fdb3d32d146
     
     小组件功能：在选择小组件是，下面有个Parmeter参数，填写网络图片链接后，等待一会即可展示。
 */
