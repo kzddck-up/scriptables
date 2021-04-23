@@ -1,3 +1,13 @@
+/*
+youtube后台播放小组件
+作者：kzddck
+微信公众号：kzddck
+首次时间：2021.04.23
+主要功能：youtube视频后台播放，浮窗播放
+使用方法：
+    关注微信公众号：kzddck获取
+*/
+
 async function open(url){
 id = url.replace("https://youtu.be/","")
 //拼接url
