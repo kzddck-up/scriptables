@@ -3,7 +3,7 @@ youtube下载小组件
 作者：kzddck
 微信公众号：kzddck
 首次时间：2021.04.23
-更新时间：2021.05.19
+更新时间：2021.06.06
 主要功能：下载youtube视频
 更新内容：修复无法下载的错误
 使用方法：
@@ -17,10 +17,8 @@ youtube下载小组件
 async function geturl(url) {
     id = url.replace("https://youtu.be/", "")
     //拼接url
-    newurl = `https://www.youtube.com/get_video_info?video_id=${id}&el=detailpage`,
-        req = new Request(newurl)
-         var cookie = Keychain.get("youtubecookieCase")
-req.headers = {'cookie': cookie}
+    newurl = `https://www.youtube.com/get_video_info?video_id=${id}&html5=1`,
+    req = new Request(newurl)
     res = await req.loadString()
     re = /player_response=.+&enablecsi/
     datas = unescape(res.match(re)[0].replace('player_response=', '').replace('&enablecsi', '')).replace(/\\"/g, "'")
@@ -62,39 +60,21 @@ url = Pasteboard.paste()
 imgurl = args.widgetParameter
 fm = FileManager.local()
 try {
-    if (url.indexOf('youtu.be') > 0) {
-        await run(url)
-    } else {
-        img = await getimg(imgurl)
-        pic_cache_path = fm.joinPath(fm.documentsDirectory(), `youtube`)
-        fm.writeImage(pic_cache_path, img)
-        const widget = new ListWidget()
-        widget.setPadding(0, 0, 0, 0)
-        const info_stack = widget.addStack()
-        info_stack.layoutVertically()
-        info_stack.addSpacer()
-        const name_stack = info_stack.addStack()
-        info_stack.setPadding(10, 10, 5, 10)
-        name_stack.addSpacer()
-        widget.backgroundImage = img
-        widget.presentSmall()
-        Script.setWidget(widget)
-        Script.complete()
-    }
+    await run(url)
 } catch {
-const loginUrl = "https://accounts.google.com/signin/v2/identifier?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Dzh-CN%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252F&hl=zh-CN&ec=65620&flowName=GlifWebSignIn&flowEntry=ServiceLogin";
-        const webview = new WebView();
-        await webview.loadURL(loginUrl);
-        await webview.present();
-        const req = new Request("https://www.instagram.com/")
-        req.method = "get"
-        const res = await req.loadString()
-        const cookies = req.response.cookies
-        var arr = ''
-        //遍历cookie
-        for (var i = 0; i < cookies.length; i++) {
-            arr += cookies[i].name + "=" + cookies[i].value + ";"
-        }
-          //写入cookie缓存
-        Keychain.set("youtubecookieCase", arr)
+    img = await getimg(imgurl)
+    pic_cache_path = fm.joinPath(fm.documentsDirectory(), `youtube`)
+    fm.writeImage(pic_cache_path, img)
+    const widget = new ListWidget()
+    widget.setPadding(0, 0, 0, 0)
+    const info_stack = widget.addStack()
+    info_stack.layoutVertically()
+    info_stack.addSpacer()
+    const name_stack = info_stack.addStack()
+    info_stack.setPadding(10, 10, 5, 10)
+    name_stack.addSpacer()
+    widget.backgroundImage = img
+    widget.presentSmall()
+    Script.setWidget(widget)
+    Script.complete()
 }
