@@ -28,13 +28,17 @@ async function geturl(url) {
     return { "code": "200", "msg": "成功", "data": { "downurl": [{ "url": playerResponse[len].url }] } }
 }
 async function getimg(url) {
-    if (url == null) {
-        log(url)
-        var url = 'http://p6.itc.cn/images03/20200520/490c762cd4f3430786920e074180cc27.jpeg'
-    }
+    
+        if(url== null){
+     url = 'http://p6.itc.cn/images03/20200520/490c762cd4f3430786920e074180cc27.jpeg'
     req = new Request(url)
     img = await req.loadImage()
     return img
+    }else{
+        req = new Request(url)
+    img = await req.loadImage()
+    return img
+    }
 }
 
 async function run(url) {
