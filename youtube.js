@@ -26,12 +26,17 @@ async function open(url){
   Safari.open(playerResponse[len].url)
   }
   async function getimg(url) {
-      if(url == null){
-      var url = 'https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/84/1d/9a/841d9afa-769a-8355-5a67-3c846e6e8a92/logo_youtube_color-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png'
-      }
-      req = new Request(url)
-      img = await req.loadImage()
-      return img
+      
+        if(url== null){
+     url = 'https://is3-ssl.mzstatic.com/image/thumb/Purple125/v4/84/1d/9a/841d9afa-769a-8355-5a67-3c846e6e8a92/logo_youtube_color-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/460x0w.png'
+    req = new Request(url)
+    img = await req.loadImage()
+    return img
+    }else{
+        req = new Request(url)
+    img = await req.loadImage()
+    return img
+    }
   }
   
   
